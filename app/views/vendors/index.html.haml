@@ -1,0 +1,24 @@
+= styles_for :vendor
+
+= render 'entities/title_bar'
+
+.remote.create#create_vendor{ hidden }
+
+.remote#options{ hidden }
+
+.list#vendors
+	- if @vendors.any?
+		%table.table#vendorTable
+			%thead
+				%tr
+					%th{:title => "Name"} Name
+					%th{:title => "Email"} Email
+					%th{:title => "Phone"} Phone
+					%th{:title => "Products"} Products
+					%th{:title => "Actions"} Actions
+			= render @vendors
+	- else
+		= render "shared/empty"
+#export= render "shared/export"
+:javascript
+	$('#vendorTable').DataTable();

@@ -1,0 +1,33 @@
+
+= hook(:lead_top_section, self, f: f) do
+  .section
+    %table
+      %tr
+        %td
+          .label.top{ class: "#{Setting.require_first_names ? 'req' : nil}" } #{t :vendor_name}:
+          = f.text_field :name, autofocus: true, class: "form-control"
+        %td= spacer
+        %td= spacer
+      %tr
+        %td
+          .label.req #{t :email}:
+          = f.text_field :email, class: "form-control"
+        %td= spacer
+        %td
+          .label.req #{t :phone}:
+          = f.text_field :phone, class: "form-control"
+      %tr    
+        %td(colspan="3")
+          .label.req #{t :Products}:
+          = f.input :product_ids, as: :select, collection: Product.order(:name), label_method: :name, input_html: {multiple: true}, label: false
+
+
+      - if Setting.background_info && Setting.background_info.include?(:lead)
+        %tr
+          %td(colspan="3")
+            .label= t(:background_info) + ':'
+            = f.text_area :background_info, style: "width:500px", rows: 3, class: "form-control"
+
+      / = render partial: "/shared/tags", locals: {f: f, span: 3}
+
+      = hook(:lead_top_section_bottom, self, f: f)

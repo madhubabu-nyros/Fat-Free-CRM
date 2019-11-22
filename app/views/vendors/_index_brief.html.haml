@@ -1,0 +1,14 @@
+%tr
+	%td.leadData= link_to_if can?(:read, vendor), vendor.name, vendor
+	%td.leadData= link_to_if can?(:read, vendor), vendor.email, vendor
+	%td.leadData= link_to_if can?(:read, vendor), vendor.phone, vendor
+	%td.leadData
+		- vendor.product_lists.each do |r|
+			=link_to_if can?(:read, vendor), r.product.name.split(" ").join(", "), vendor
+	%td  
+		%ul.tools
+			- if can?(:update, vendor)
+				%li.edit_form= link_to_edit(vendor)
+			- if can?(:destroy, vendor)
+				%li= link_to_delete(vendor) 
+.highlight[vendor]				

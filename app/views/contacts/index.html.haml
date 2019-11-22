@@ -1,0 +1,27 @@
+= styles_for :contact
+
+= render 'entities/title_bar'
+
+.remote.create#create_contact{ hidden }
+
+/ = render "search"
+
+.remote#options{ hidden }
+
+.list#contacts
+	- if @contacts.any?
+		%table.table#contactTable
+			%thead
+				%tr
+					%th{:title => "Name"} Name
+					%th{:title => "Email"} Email
+					%th{:title => "Phone"} Phone
+					%th{:title => "Actions"} Actions
+			= render @contacts
+	- else
+		= render "shared/empty"
+
+/ #paginate= render "shared/paginate_with_per_page"
+#export= render "shared/export"
+:javascript
+	$('#contactTable').DataTable();

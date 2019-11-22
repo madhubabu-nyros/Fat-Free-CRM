@@ -1,0 +1,11 @@
+- if (template = template_for_current_view)
+  = render(template, vendor: @vendor)
+- else
+
+  -# default view
+
+  = styles_for :task
+
+  = render 'vendors/title_bar', vendor: @vendor
+
+  = render partial: "versions/versions", locals: {object: @vendor}

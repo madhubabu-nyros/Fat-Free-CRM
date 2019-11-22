@@ -1,0 +1,65 @@
+%tr
+  %td
+    - if lead.status
+      .strip{class: lead.status}= t lead.status
+    - else
+      .strip{style: "color: gray;"}= t :other
+  %td.leadData= link_to lead.full_name(current_user.preference[:leads_naming]), lead_path(lead)
+  %td.leadData= link_to_if can?(:read, lead), lead.email, lead
+  %td.leadData= link_to_if can?(:read, lead), lead.phone, lead
+  %tt
+    - if lead.company? && lead.title?
+      = t(:works_at, job_title: lead.title, company: lead.company)
+    - else
+      = lead.company if lead.company?
+      = lead.title if lead.title?
+    - if lead.referred_by?
+      &ndash;
+      == #{t :referred_by_small} #{lead.referred_by}
+
+  = hook(:lead_bottom, self, lead: lead)  
+  %td  
+    %ul.tools
+      - if can?(:update, lead)
+        %li.edit_form= link_to_edit(lead)
+
+      - if %w(converted rejected).include?(lead.status)
+        %li
+          %font{ color: 'silver' }= t :convert
+      - elsif can?(:update, lead)
+        %li= link_to_convert(lead)
+
+      - if lead.status == "rejected"
+        %li
+          %font{ color: 'silver' }= t :reject
+      - elsif can?(:update, lead)
+        %li= link_to_reject(lead)
+
+      - if shown_on_landing_page?
+        %li= link_to_discard(lead)
+
+      - if can?(:destroy, lead)
+        %li= link_to_delete(lead) 
+        / %li= link_to 'Delete',url_for(action: :delete, id: lead.id),method: :delete, data: {confirm: "Are you sure?"}
+.highlight[lead]
+/ %tr{class: "edit_form"}
+/   %td{colspan: "5"}
+/     .highlight[lead]
+
+
+
+/ .indent
+/   = link_to_if can?(:read, lead), lead.full_name(current_user.preference[:leads_naming]), lead
+/   = link_to_if can?(:read, lead), lead.email, lead
+/   = link_to_if can?(:read, lead), lead.phone, lead
+/   %tt
+/     - if lead.company? && lead.title?
+/       = t(:works_at, job_title: lead.title, company: lead.company)
+/     - else
+/       = lead.company if lead.company?
+/       = lead.title if lead.title?
+/     - if lead.referred_by?
+/       &ndash;
+/      == #{t :referred_by_small} #{lead.referred_by}
+
+/ = hook(:lead_bottom, self, lead: lead)

@@ -1,0 +1,19 @@
+= simple_form_for(@vendor, html: one_submit_only, remote: true) do |f|
+  = link_to_close new_vendor_path
+  = f.hidden_field :user_id
+  = f.error_messages object_name: t('vendor')
+
+  = render "vendors/top_section",    f: f
+
+  .buttonbar
+    - if Setting.compound_address
+      = f.submit t(:create_vendor), onclick: "crm.clear_all_hints()",  class: "btn btn-info"
+    - else
+      = f.submit t(:create_vendor)
+    #{t :or}
+    %span.cancel= link_to_cancel new_vendor_path
+:javascript
+  $('#vendor_product_ids').chosen({
+    allow_single_deselect: true,
+    width: '100%'
+  })    

@@ -1,0 +1,28 @@
+= styles_for :account
+
+= render 'entities/title_bar'
+
+.remote#create_account{ hidden }
+
+/ = render 'search'
+
+.remote#options{ hidden }
+
+.list#accounts
+	- if @accounts.any?
+		%table.table#accountTable
+			%thead
+				%tr
+					%th{:title => "Type"} Type
+					%th{:title => "Name"} Name
+					%th{:title => "Email"} Email
+					%th{:title => "Phone"} Phone
+					%th{:title => "Actions"} Actions
+			= render @accounts
+	- else
+		= render "shared/empty"
+
+/ #paginate= render "shared/paginate_with_per_page"
+#export= render "shared/export"
+:javascript
+	$('#accountTable').DataTable();
