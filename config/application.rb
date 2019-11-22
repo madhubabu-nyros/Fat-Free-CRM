@@ -42,7 +42,7 @@ module FatFreeCRM
     unless ARGV.join.include?('assets:precompile')
       config.active_record.observers = :lead_observer, :opportunity_observer, :task_observer, :entity_observer
     end
-
+    config.assets.initialize_on_precompile = false
     # Load development rake tasks (RSpec, Gem packaging, etc.)
     rake_tasks do
       Dir.glob(Rails.root.join('lib', 'development_tasks', '*.rake')).each { |t| load t }
