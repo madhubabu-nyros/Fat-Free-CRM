@@ -8,6 +8,7 @@ default: &default
 
 development:
   <<: *default
+  adapter: postgresql
   database: Sample
 
 test:
@@ -16,4 +17,5 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
   database: Sample

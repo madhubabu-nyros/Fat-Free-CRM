@@ -112,3 +112,4 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-chosen'
 end
 gem 'turbolinks'
+gem 'postgresql'
