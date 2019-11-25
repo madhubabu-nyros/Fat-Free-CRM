@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  database: Sample
+  username: root
+  password: root123*
+  host: localhost
+  port: 3000
+
+development:
+  <<: *default
+  adapter: postgresql
+  database: Sample
+
+test:
+  <<: *default
+  adapter: postgresql
+  database: Sample
+
+production:
+  <<: *default
+  adapter: postgresql
+  database: Sample
