@@ -1,5 +1,5 @@
 default: &default
-  adapter: postgresql
+  adapter: mysql2
   database: Sample
   username: root
   password: root123*
@@ -8,15 +8,12 @@ default: &default
 
 development:
   <<: *default
-  adapter: postgresql
   database: Sample
 
 test:
   <<: *default
-  adapter: postgresql
   database: Sample
 
 production:
   <<: *default
-  adapter: postgresql
   database: Sample
