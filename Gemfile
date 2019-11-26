@@ -81,10 +81,10 @@ group :test do
   gem 'timecop'
 end
 
-group :heroku do
-  gem 'rails_12factor'
-  gem 'puma'
-end
+# group :heroku do
+#   gem 'rails_12factor'
+#   gem 'puma'
+# end
 
 gem 'sass-rails', '~> 5.0.3' # sass-rails 6 requires GCC 4.5+
 gem 'coffee-rails'
@@ -112,4 +112,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-chosen'
 end
 gem 'turbolinks'
-gem 'pg', '~> 1.1', '>= 1.1.4'
+group :production do
+  gem 'pg', '~> 1.1', '>= 1.1.4'
+end  
+gem 'puma'
